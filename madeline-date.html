@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Special Owl Post for Madeline ✉️</title>
+  <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #f0c040;
+      --dark-gold: #b8860b;
+      --parchment: #f5e6c8;
+      --parchment-dark: #e8d5a3;
+      --ink: #2c1a0e;
+      --red: #740001;
+      --green: #1a472a;
+      --blue: #0e1a40;
+      --purple: #5d2c8b;
+    }
+
+    body {
+      background-color: #0a0a0f;
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(93,44,139,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(116,0,1,0.15) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      min-height: 100vh;
+      font-family: 'IM Fell English', serif;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    /* Floating stars */
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle var(--dur) ease-in-out infinite var(--delay);
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.1; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    /* Floating particles */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      font-size: 1.2rem;
+      animation: float-up linear infinite;
+      opacity: 0;
+    }
+    @keyframes float-up {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .envelope-wrap {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    /* ---- INTRO SCREEN ---- */
+    #intro-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      animation: fadeIn 1.5s ease both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hogwarts-crest {
+      font-size: 5rem;
+      filter: drop-shadow(0 0 30px rgba(240,192,64,0.8));
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .envelope {
+      width: 320px;
+      height: 220px;
+      position: relative;
+      cursor: pointer;
+      filter: drop-shadow(0 10px 40px rgba(240,192,64,0.3));
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .envelope:hover {
+      transform: scale(1.04) rotate(-1deg);
+      filter: drop-shadow(0 15px 50px rgba(240,192,64,0.6));
+    }
+    .envelope svg { width: 100%; height: 100%; }
+
+    .envelope-label {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      text-align: center;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px rgba(240,192,64,0.5);
+      animation: pulse-text 2s ease-in-out infinite;
+    }
+    @keyframes pulse-text {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    .hogwarts-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      color: rgba(240,192,64,0.5);
+      text-transform: uppercase;
+    }
+
+    .intro-card {
+      background: var(--parchment);
+      background-image: linear-gradient(135deg, #f9edd4 0%, var(--parchment) 40%, #edd9a3 100%);
+      border-radius: 4px;
+      padding: 40px 48px;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.3),
+        0 20px 60px rgba(0,0,0,0.5),
+        inset 0 0 80px rgba(139,90,43,0.1);
+      border: 1px solid rgba(139,90,43,0.3);
+      text-align: center;
+      width: 100%;
+      position: relative;
+    }
+    .intro-card::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(139,90,43,0.2);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .intro-sparkle-row {
+      font-size: 1.2rem;
+      letter-spacing: 8px;
+      color: var(--gold);
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 8px rgba(240,192,64,0.6));
+    }
+    .intro-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(44,26,14,0.5);
+      margin-bottom: 8px;
+    }
+    .intro-name {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .intro-divider {
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(139,90,43,0.4), transparent);
+      margin: 0 auto 24px;
+    }
+    .intro-question {
+      font-family: 'IM Fell English', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #3d2010;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .intro-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      min-height: 60px;
+      position: relative;
+    }
+    .intro-yes-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--parchment);
+      background: linear-gradient(135deg, #1a472a, #2d6a4f);
+      border: none;
+      padding: 14px 36px;
+      border-radius: 2px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(26,71,42,0.5);
+      transition: all 0.3s ease;
+    }
+    .intro-yes-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 8px 30px rgba(26,71,42,0.7);
+    }
+    .intro-no-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--parchment);
+      border: 1.5px solid rgba(139,90,43,0.35);
+      padding: 14px 28px;
+      border-radius: 2px;
+      cursor: pointer;
+      z-index: 200;
+    }
+    .intro-no-btn.is-fixed {
+      position: fixed;
+      transition: left 0.35s cubic-bezier(0.34,1.56,0.64,1), top 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease, font-size 0.3s ease;
+    }
+    .intro-no-btn:hover { border-color: rgba(139,90,43,0.6); }
+    .intro-taunt {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--red);
+      min-height: 1.4em;
+      margin-top: 16px;
+      transition: opacity 0.3s ease;
+    }
+
+    /* ---- LETTER SCREEN ---- */
+    #letter-screen {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .parchment {
+      background: var(--parchment);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeBlend in='SourceGraphic' mode='multiply'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E"),
+        linear-gradient(135deg, #f9edd4 0%, var(--parchment) 40%, #edd9a3 100%);
+      border-radius: 4px;
+      padding: 48px 52px;
+      position: relative;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.3),
+        0 20px 60px rgba(0,0,0,0.5),
+        inset 0 0 80px rgba(139,90,43,0.15);
+      border: 1px solid rgba(139,90,43,0.3);
+    }
+
+    .parchment::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(139,90,43,0.2);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    .wax-seal {
+      width: 70px;
+      height: 70px;
+      background: radial-gradient(circle at 35% 35%, #cc0000, #740001 60%, #4a0000);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto -35px;
+      position: relative;
+      z-index: 5;
+      box-shadow: 0 4px 15px rgba(116,0,1,0.6), inset 0 2px 4px rgba(255,100,100,0.3);
+      border: 2px solid rgba(240,192,64,0.4);
+    }
+
+    .letter-header {
+      text-align: center;
+      border-bottom: 1px solid rgba(139,90,43,0.3);
+      padding-bottom: 20px;
+      margin-bottom: 28px;
+    }
+
+    .letter-from {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      color: rgba(44,26,14,0.5);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .letter-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .letter-body {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #3d2010;
+      font-style: italic;
+    }
+
+    .letter-body p { margin-bottom: 16px; }
+    .letter-body strong { font-style: normal; font-size: 1.1rem; }
+
+    .spell-highlight {
+      font-family: 'Cinzel', serif;
+      font-style: normal;
+      color: var(--red);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .begin-btn {
+      display: block;
+      width: fit-content;
+      margin: 32px auto 0;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--parchment);
+      background: linear-gradient(135deg, #740001, #b8000a);
+      border: none;
+      padding: 14px 40px;
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(116,0,1,0.5);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    .begin-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+    }
+    .begin-btn:hover::before { transform: translateX(100%); }
+    .begin-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(116,0,1,0.7);
+    }
+
+    /* ---- QUIZ SCREEN ---- */
+    #quiz-screen {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .question-parchment {
+      background: var(--parchment);
+      background-image: linear-gradient(135deg, #f9edd4 0%, var(--parchment) 40%, #edd9a3 100%);
+      border-radius: 4px;
+      padding: 40px 48px;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.3),
+        0 20px 60px rgba(0,0,0,0.5),
+        inset 0 0 80px rgba(139,90,43,0.1);
+      border: 1px solid rgba(139,90,43,0.3);
+      position: relative;
+    }
+
+    .question-parchment::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(139,90,43,0.2);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    .progress-bar-wrap {
+      margin-bottom: 28px;
+    }
+    .progress-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: rgba(44,26,14,0.5);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .progress-track {
+      height: 6px;
+      background: rgba(44,26,14,0.15);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--dark-gold), var(--gold));
+      border-radius: 3px;
+      transition: width 0.6s ease;
+      box-shadow: 0 0 8px rgba(240,192,64,0.5);
+    }
+
+    .question-icon {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.2));
+    }
+
+    .question-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: center;
+      line-height: 1.4;
+      margin-bottom: 32px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .option-btn {
+      background: rgba(44,26,14,0.06);
+      border: 1.5px solid rgba(139,90,43,0.3);
+      border-radius: 3px;
+      padding: 16px 14px;
+      font-family: 'IM Fell English', serif;
+      font-size: 0.95rem;
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .option-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(240,192,64,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .option-btn:hover {
+      border-color: var(--dark-gold);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(139,90,43,0.2);
+    }
+    .option-btn:hover::after { opacity: 1; }
+    .option-btn.selected {
+      border-color: var(--gold);
+      background: rgba(240,192,64,0.15);
+      box-shadow: 0 0 20px rgba(240,192,64,0.3);
+    }
+    .option-btn.correct {
+      border-color: #2d6a2d;
+      background: rgba(45,106,45,0.15);
+      animation: correct-flash 0.5s ease;
+    }
+    .option-btn.wrong {
+      border-color: var(--red);
+      background: rgba(116,0,1,0.1);
+      animation: shake 0.4s ease;
+    }
+    @keyframes correct-flash {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    .option-letter {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--dark-gold);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ---- FINAL SCREEN ---- */
+    #final-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+      animation: fadeIn 1s ease both;
+    }
+
+    .final-parchment {
+      background: var(--parchment);
+      background-image: linear-gradient(135deg, #f9edd4 0%, var(--parchment) 40%, #edd9a3 100%);
+      border-radius: 4px;
+      padding: 48px 52px;
+      position: relative;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.3),
+        0 20px 60px rgba(0,0,0,0.5),
+        inset 0 0 80px rgba(139,90,43,0.1);
+      border: 1px solid rgba(139,90,43,0.3);
+      width: 100%;
+      max-width: 680px;
+      text-align: center;
+    }
+    .final-parchment::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(139,90,43,0.2);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    .final-icon { font-size: 5rem; animation: float 3s ease-in-out infinite; margin-bottom: 8px; }
+
+    .final-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .final-subtitle {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #5a3a1a;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .date-details {
+      background: rgba(44,26,14,0.06);
+      border: 1.5px solid rgba(139,90,43,0.3);
+      border-radius: 3px;
+      padding: 24px 32px;
+      margin: 20px 0;
+      font-family: 'Cinzel', serif;
+    }
+    .date-details h3 {
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .date-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--ink);
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .date-detail-item:last-child { margin-bottom: 0; }
+    .detail-icon { font-size: 1.2rem; }
+
+    .yes-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--parchment);
+      background: linear-gradient(135deg, #1a472a, #2d6a4f);
+      border: none;
+      padding: 16px 48px;
+      border-radius: 2px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(26,71,42,0.5);
+      transition: all 0.3s ease;
+      margin-right: 12px;
+    }
+    .yes-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(26,71,42,0.7);
+    }
+
+    .no-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: transparent;
+      border: 1.5px solid rgba(139,90,43,0.4);
+      padding: 16px 32px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* Celebration */
+    .confetti-piece {
+      position: fixed;
+      top: -10px;
+      width: 10px; height: 10px;
+      opacity: 0;
+      animation: confetti-fall linear forwards;
+      z-index: 100;
+      border-radius: 2px;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0.3; }
+    }
+
+    #accepted-msg {
+      display: none;
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      color: #1a472a;
+      text-align: center;
+      font-weight: 700;
+      animation: fadeIn 1s ease both;
+      margin-top: 16px;
+    }
+
+    .divider {
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(139,90,43,0.4), transparent);
+      margin: 20px auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      .parchment, .question-parchment, .final-parchment { padding: 32px 24px; }
+      .options-grid { grid-template-columns: 1fr; }
+      .letter-title { font-size: 1.2rem; }
+      .question-text { font-size: 1.05rem; }
+      .envelope { width: 260px; height: 180px; }
+    }
+
+    /* Screen transitions */
+    .screen-hidden { display: none !important; }
+    .screen-visible { display: flex !important; }
+  </style>
+</head>
+<body>
+
+<!-- Stars background -->
+<div class="stars" id="stars"></div>
+
+<div class="envelope-wrap">
+
+  <!-- INTRO SCREEN -->
+  <div id="intro-screen">
+    <div class="hogwarts-title">Hogwarts School of Witchcraft and Wizardry</div>
+    <div class="hogwarts-crest">🦉</div>
+
+    <div class="intro-card">
+      <div class="intro-sparkle-row">✨ &nbsp; ⚡ &nbsp; ✨</div>
+      <div class="intro-subtitle">A very important owl has arrived for</div>
+      <div class="intro-name">Miss Madeline</div>
+      <div class="intro-divider"></div>
+      <div class="intro-question">But first… are you ready for a little magic?</div>
+      <div class="intro-buttons">
+        <button class="intro-yes-btn" onclick="openEnvelope()">🌟 Obviously, yes!</button>
+        <button class="intro-no-btn" id="intro-no-btn" onclick="runAwayNo(this)">🙅 No…</button>
+      </div>
+      <div class="intro-taunt" id="intro-taunt"></div>
+    </div>
+  </div>
+
+  <!-- LETTER SCREEN -->
+  <div id="letter-screen">
+    <div class="wax-seal">⚡</div>
+    <div class="parchment">
+      <div class="letter-header">
+        <div class="letter-from">Hogwarts School of Witchcraft &amp; Wizardry</div>
+        <div class="letter-title">A Most Urgent Letter for<br/>Miss Madeline</div>
+      </div>
+      <div class="letter-body">
+        <p>Dear Madeline,</p>
+        <p>We are pleased to inform you that you have been selected for a very special quest — one that requires the bravery of a <strong>Gryffindor</strong>, the wit of a <strong>Ravenclaw</strong>, and frankly, the good taste to say <em>yes</em> to a rather lovely date.</p>
+        <p>Before this date can begin, the Ministry of Magic requires you to pass a brief examination to prove your worthiness. Answer wisely — your fate (and a wonderful day out) depends upon it.</p>
+        <p>Should you successfully complete the trials ahead, a grand <span class="spell-highlight">✨ Magical Date ✨</span> shall be revealed to you — planned with great care by someone who thinks you're rather magical.</p>
+        <div class="divider"></div>
+        <p style="font-size:0.88rem; color: #8b5a2b;">
+          <em>P.S. — Results are magically binding. Dropping your wand is not an accepted form of refusal.</em>
+        </p>
+      </div>
+      <button class="begin-btn" onclick="startQuiz()">⚡ Begin the Trials</button>
+    </div>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="quiz-screen">
+    <div class="question-parchment">
+      <div class="progress-bar-wrap">
+        <div class="progress-label">
+          <span>Your Progress</span>
+          <span id="progress-text">Question 1 of 5</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+        </div>
+      </div>
+      <div class="question-icon" id="q-icon">🦉</div>
+      <div class="question-tag" id="q-tag">Trial I</div>
+      <div class="question-text" id="q-text">Question text goes here</div>
+      <div class="options-grid" id="options-grid"></div>
+    </div>
+  </div>
+
+  <!-- FINAL SCREEN -->
+  <div id="final-screen">
+    <div class="final-parchment">
+      <div class="final-icon">🗺️</div>
+      <div class="final-title">The Quest Awaits, Madeline!</div>
+      <div class="final-subtitle">
+        You have passed the trials with flying colours.<br/>
+        The Ministry of Magic is delighted to announce your next adventure:
+      </div>
+
+      <div class="date-details">
+        <h3>✨ Your Official Quest Details ✨</h3>
+        <div id="date-details-list">
+          <div class="date-detail-item"><span class="detail-icon">✨</span><span>Your personalised adventure awaits…</span></div>
+        </div>
+      </div>
+
+      <div class="final-subtitle" style="margin-bottom: 12px;">
+        So… what do you say, Madeline?<br/>
+        <em>Will you accept this quest?</em>
+      </div>
+
+      <div>
+        <button class="yes-btn" onclick="acceptDate()">🌟 Yes, I Accept!</button>
+        <button class="no-btn" id="no-btn" onclick="moveNoButton()">Hmm… no</button>
+      </div>
+
+      <div id="accepted-msg">
+        🎉 Mischief Managed! Get ready for the best adventure! 🎉
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ---- Generate stars ----
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 120; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.cssText = `
+      left: ${Math.random()*100}%;
+      top: ${Math.random()*100}%;
+      --dur: ${2 + Math.random()*4}s;
+      --delay: ${Math.random()*4}s;
+    `;
+    starsEl.appendChild(star);
+  }
+
+  // ---- Floating HP particles ----
+  const particles = ['⚡','✨','🌟','🦉','🔮','🧙','🪄','💫','🌙','⭐'];
+  for (let i = 0; i < 12; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.textContent = particles[Math.floor(Math.random()*particles.length)];
+    p.style.cssText = `
+      left: ${Math.random()*100}%;
+      animation-duration: ${8 + Math.random()*12}s;
+      animation-delay: ${Math.random()*10}s;
+      font-size: ${0.8 + Math.random()*0.8}rem;
+    `;
+    document.body.appendChild(p);
+  }
+
+  // ---- Questions ----
+  const preferences = { activity: null, relaxation: null };
+
+  const questions = [
+    {
+      icon: '🦁',
+      tag: 'Trial I — The Sorting',
+      text: 'Which Hogwarts house would the Sorting Hat put you in?',
+      options: [
+        { letter: 'A', text: '🦁 Gryffindor — brave and daring' },
+        { letter: 'B', text: '🦡 Hufflepuff — loyal and kind' },
+        { letter: 'C', text: '🦅 Ravenclaw — clever and witty' },
+        { letter: 'D', text: '🐍 Slytherin — ambitious and cunning' },
+      ],
+      correct: null
+    },
+    {
+      icon: '🧙',
+      tag: 'Trial II — The Charm',
+      text: "You've found a Portkey disguised as a hiking boot. Where does it take you?",
+      options: [
+        { letter: 'A', text: '🏔️ A misty mountain summit' },
+        { letter: 'B', text: '🌊 A secret coastal cliff path' },
+        { letter: 'C', text: '🌲 A magical ancient forest' },
+        { letter: 'D', text: '🌸 A valley full of wildflowers' },
+      ],
+      correct: null
+    },
+    {
+      icon: '🎾',
+      tag: 'Trial III — The Activity Prophecy',
+      text: 'The crystal ball has spoken! Choose your adventure, Madeline:',
+      isPreference: true,
+      preferenceKey: 'activity',
+      options: [
+        { letter: 'A', text: '🎾 Tennis — a duel of champions on the court', value: 'tennis' },
+        { letter: 'B', text: '🐴 Horse Riding — gallop through the open wilderness', value: 'horseriding' },
+      ],
+      correct: null
+    },
+    {
+      icon: '🛁',
+      tag: 'Trial IV — The Recovery Ritual',
+      text: 'After your grand quest, how shall you restore your magical energy?',
+      isPreference: true,
+      preferenceKey: 'relaxation',
+      options: [
+        { letter: 'A', text: '🧊 Cold plunge & relaxation sanctuary — brave the icy waters', value: 'coldplunge' },
+        { letter: 'B', text: '💆 A blissful massage — melt away like warm butterbeer', value: 'massage' },
+      ],
+      correct: null
+    },
+    {
+      icon: '⚡',
+      tag: 'Trial V — The Final Test',
+      text: 'One last question: a charming wizard has planned all of this just for you. Do you say…',
+      options: [
+        { letter: 'A', text: '⚡ YES! Accio adventure!' },
+        { letter: 'B', text: '✨ Absolutely, this sounds magical!' },
+        { letter: 'C', text: "🌟 Obviously yes, let's go!" },
+        { letter: 'D', text: '🧙 100% yes, Mischief Managed!' },
+      ],
+      correct: null
+    }
+  ];
+
+  let currentQ = 0;
+  let answeredCount = 0;
+
+  // ---- Run away No button ----
+  const taunts = [
+    "The Sorting Hat says: wrong answer! 🎩",
+    "Accio courage, Madeline! 🪄",
+    "Even Neville said yes to things! ⚡",
+    "The prophecy demands a YES! 🔮",
+    "Dumbledore is disappointed… 🌙",
+    "Dobby is very sad right now 🧦",
+    "Butterbeer's on the line here! 🍺",
+    "The owls are watching you… 🦉",
+    "Try harder. The button is judging you. ✨",
+    "That option has been Vanished. 💨"
+  ];
+  let noClickCount = 0;
+
+  function runAwayNo(btn) {
+    noClickCount++;
+    const taunt = document.getElementById('intro-taunt');
+    taunt.textContent = taunts[Math.min(noClickCount - 1, taunts.length - 1)];
+
+    const margin = 20;
+    const bw = btn.offsetWidth;
+    const bh = btn.offsetHeight;
+
+    // On first click: get current position, switch to fixed, teleport there, then animate away
+    if (!btn.classList.contains('is-fixed')) {
+      const rect = btn.getBoundingClientRect();
+      btn.classList.add('is-fixed');
+      btn.style.left = rect.left + 'px';
+      btn.style.top = rect.top + 'px';
+      btn.style.width = bw + 'px';
+      // Force reflow so transition fires
+      btn.offsetHeight;
+    }
+
+    const maxX = window.innerWidth - bw - margin;
+    const maxY = window.innerHeight - bh - margin;
+    const curX = parseFloat(btn.style.left) || 0;
+    const curY = parseFloat(btn.style.top) || 0;
+
+    let newX, newY, attempts = 0;
+    do {
+      newX = margin + Math.random() * maxX;
+      newY = margin + Math.random() * maxY;
+      attempts++;
+    } while (attempts < 30 && Math.abs(newX - curX) < 120 && Math.abs(newY - curY) < 80);
+
+    btn.style.left = newX + 'px';
+    btn.style.top = newY + 'px';
+
+    if (noClickCount >= 5) {
+      btn.style.opacity = '0';
+      btn.style.pointerEvents = 'none';
+      taunt.textContent = "The No button has been Banished. Only one choice remains… ✨";
+    } else {
+      btn.style.fontSize = Math.max(0.55, 0.85 - noClickCount * 0.07) + 'rem';
+    }
+  }
+
+  // ---- Open envelope ----
+  function openEnvelope() {
+    const intro = document.getElementById('intro-screen');
+    const letter = document.getElementById('letter-screen');
+    // Hide the floating no-btn
+    const noBtn = document.getElementById('intro-no-btn');
+    if (noBtn) noBtn.style.display = 'none';
+    intro.style.animation = 'fadeOut 0.5s ease forwards';
+    setTimeout(() => {
+      intro.classList.add('screen-hidden');
+      letter.style.display = 'flex';
+      letter.style.animation = 'fadeIn 0.8s ease both';
+    }, 400);
+  }
+
+  // ---- Start Quiz ----
+  function startQuiz() {
+    const letter = document.getElementById('letter-screen');
+    const quiz = document.getElementById('quiz-screen');
+    letter.style.animation = 'fadeOut 0.5s ease forwards';
+    setTimeout(() => {
+      letter.classList.add('screen-hidden');
+      quiz.style.display = 'flex';
+      quiz.style.flexDirection = 'column';
+      quiz.style.animation = 'fadeIn 0.8s ease both';
+      loadQuestion(0);
+    }, 400);
+  }
+
+  function loadQuestion(index) {
+    const q = questions[index];
+    document.getElementById('q-icon').textContent = q.icon;
+    document.getElementById('q-tag').textContent = q.tag;
+    document.getElementById('q-text').textContent = q.text;
+    document.getElementById('progress-text').textContent = `Question ${index + 1} of ${questions.length}`;
+    document.getElementById('progress-fill').style.width = `${(index / questions.length) * 100}%`;
+
+    const grid = document.getElementById('options-grid');
+    grid.innerHTML = '';
+    grid.style.gridTemplateColumns = q.options.length === 2 ? '1fr 1fr' : '1fr 1fr';
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      if (q.options.length === 2) btn.style.padding = '22px 18px';
+      btn.innerHTML = `<span class="option-letter">${opt.letter}</span>${opt.text}`;
+      btn.onclick = () => selectAnswer(btn, i, index);
+      grid.appendChild(btn);
+    });
+
+    // Animate in
+    const qp = document.querySelector('.question-parchment');
+    qp.style.animation = 'none';
+    qp.offsetHeight;
+    qp.style.animation = 'fadeIn 0.5s ease both';
+  }
+
+  function selectAnswer(btn, optIndex, qIndex) {
+    const allBtns = document.querySelectorAll('.option-btn');
+    allBtns.forEach(b => b.style.pointerEvents = 'none');
+
+    btn.classList.add('correct');
+    spawnSparkles(btn);
+
+    // Store preference if this is a preference question
+    const q = questions[qIndex];
+    if (q.isPreference && q.options[optIndex].value) {
+      preferences[q.preferenceKey] = q.options[optIndex].value;
+    }
+
+    setTimeout(() => {
+      currentQ++;
+      if (currentQ < questions.length) {
+        loadQuestion(currentQ);
+      } else {
+        showFinal();
+      }
+    }, 900);
+  }
+
+  function spawnSparkles(el) {
+    const rect = el.getBoundingClientRect();
+    for (let i = 0; i < 6; i++) {
+      const s = document.createElement('div');
+      s.style.cssText = `
+        position: fixed;
+        left: ${rect.left + Math.random()*rect.width}px;
+        top: ${rect.top + Math.random()*rect.height}px;
+        font-size: ${0.8+Math.random()}rem;
+        pointer-events: none;
+        z-index: 999;
+        animation: sparkle-pop 0.8s ease forwards;
+      `;
+      s.textContent = ['✨','⭐','💫','🌟'][Math.floor(Math.random()*4)];
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 900);
+    }
+  }
+
+  // ---- Show final ----
+  function showFinal() {
+    const quiz = document.getElementById('quiz-screen');
+    const final = document.getElementById('final-screen');
+    quiz.style.animation = 'fadeOut 0.5s ease forwards';
+
+    // Build personalised date details
+    const activityLine = preferences.activity === 'tennis'
+      ? { icon: '🎾', text: 'A tennis battle — may the best wizard win!' }
+      : { icon: '🐴', text: 'A horse riding adventure through the open countryside!' };
+
+    const relaxLine = preferences.relaxation === 'coldplunge'
+      ? { icon: '🧊', text: 'A cold plunge & full relaxation experience after \u2014 you\'ve earned it!' }
+      : { icon: '💆', text: 'A blissful massage to end the day in pure comfort!' };
+
+    const details = document.getElementById('date-details-list');
+    details.innerHTML = `
+      <div class="date-detail-item"><span class="detail-icon">${activityLine.icon}</span><span>${activityLine.text}</span></div>
+      <div class="date-detail-item"><span class="detail-icon">${relaxLine.icon}</span><span>${relaxLine.text}</span></div>
+      <div class="date-detail-item"><span class="detail-icon">🧙</span><span>Your guide: Someone who thinks you're rather magical</span></div>
+      <div class="date-detail-item"><span class="detail-icon">⚡</span><span>Just you, good vibes, and the perfect day ahead</span></div>
+    `;
+
+    setTimeout(() => {
+      quiz.classList.add('screen-hidden');
+      final.style.display = 'flex';
+      final.style.flexDirection = 'column';
+      final.style.alignItems = 'center';
+      final.style.animation = 'fadeIn 0.8s ease both';
+      document.getElementById('progress-fill').style.width = '100%';
+    }, 500);
+  }
+
+  // ---- Accept date ----
+  function acceptDate() {
+    document.getElementById('accepted-msg').style.display = 'block';
+    document.querySelector('.yes-btn').textContent = '🌟 AMAZING!!';
+    document.querySelector('.yes-btn').style.animation = 'float 1s ease-in-out infinite';
+    launchConfetti();
+    document.getElementById('no-btn').style.display = 'none';
+  }
+
+  // ---- Moving No button ----
+  function moveNoButton() {
+    const btn = document.getElementById('no-btn');
+    const maxX = window.innerWidth - btn.offsetWidth - 20;
+    const maxY = window.innerHeight - btn.offsetHeight - 20;
+    btn.style.position = 'fixed';
+    btn.style.zIndex = '999';
+    btn.style.left = Math.max(10, Math.random() * maxX) + 'px';
+    btn.style.top = Math.max(10, Math.random() * maxY) + 'px';
+    btn.textContent = ['Nope!','Try again!','Nice try!','Hmm, maybe not…','Run away!'][Math.floor(Math.random()*5)];
+  }
+
+  // ---- Confetti ----
+  function launchConfetti() {
+    const colors = ['#f0c040','#740001','#1a472a','#0e1a40','#5d2c8b','#ff6b6b','#ffd700'];
+    for (let i = 0; i < 80; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.cssText = `
+        left: ${Math.random()*100}vw;
+        background: ${colors[Math.floor(Math.random()*colors.length)]};
+        width: ${6+Math.random()*8}px;
+        height: ${6+Math.random()*8}px;
+        animation-duration: ${2+Math.random()*2}s;
+        animation-delay: ${Math.random()*0.5}s;
+        border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+      `;
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 4000);
+    }
+  }
+
+  // Fadeout keyframe (add dynamically)
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-20px); }
+    }
+    @keyframes sparkle-pop {
+      0% { transform: scale(0) translateY(0); opacity: 1; }
+      70% { transform: scale(1.5) translateY(-20px); opacity: 1; }
+      100% { transform: scale(0) translateY(-40px); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+</body>
+</html>
